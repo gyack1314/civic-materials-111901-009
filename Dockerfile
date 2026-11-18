@@ -1,0 +1,8 @@
+FROM python:3.11.11-slim
+WORKDIR /app
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m playwright install --with-deps chromium
+COPY . /app
+EXPOSE 8765
+CMD ["python", "-m", "source.server", "--port", "8765"]
